@@ -1,17 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/db'); // Import the connection function
+const connectDB = require('./config/db');
+const productRoutes = require('./routes/productRoutes'); // Import the product routes
 
 const app = express();
-
-// Connect to the database
 connectDB();
-
-// Middleware setup
 app.use(cors());
 
-// Basic route to test if the API is running
+// Main API Routes
+app.use('/api/products', productRoutes);
+
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
